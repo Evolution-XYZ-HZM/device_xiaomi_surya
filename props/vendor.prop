@@ -201,6 +201,9 @@ ro.config.avoid_gfx_accel=true
 # FRP
 ro.frp.pst=/dev/block/bootdevice/by-name/frp
 
+# FS-verity
+ro.apk_verity.mode=2
+
 # HVDCP
 persist.vendor.cp.fcc_main_ua=400000
 persist.vendor.cp.taper_term_mv=6500
