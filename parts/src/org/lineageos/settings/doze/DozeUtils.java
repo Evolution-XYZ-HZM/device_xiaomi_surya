@@ -17,12 +17,15 @@
 
 package org.lineageos.settings.doze;
 
+import static android.provider.Settings.Secure.DOZE_ALWAYS_ON;
+import static android.provider.Settings.Secure.DOZE_ENABLED;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.hardware.display.AmbientDisplayConfiguration;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.hardware.display.AmbientDisplayConfiguration;
 import android.os.PowerManager;
 import android.os.SystemClock;
 import android.os.UserHandle;
@@ -30,15 +33,13 @@ import android.provider.Settings;
 import android.util.Log;
 import androidx.preference.PreferenceManager;
 
-import static android.provider.Settings.Secure.DOZE_ALWAYS_ON;
-import static android.provider.Settings.Secure.DOZE_ENABLED;
-
 public final class DozeUtils {
     private static final String TAG = "DozeUtils";
     private static final boolean DEBUG = false;
 
     private static final String DOZE_INTENT = "com.android.systemui.doze.pulse";
 
+    protected static final String DOZE_ENABLE = "doze_enable";
     protected static final String ALWAYS_ON_DISPLAY = "always_on_display";
     protected static final String WAKE_ON_GESTURE_KEY = "wake_on_gesture";
     protected static final String CATEG_PICKUP_SENSOR = "pickup_sensor";
@@ -89,11 +90,15 @@ public final class DozeUtils {
 
     protected static void wakeOrLaunchDozePulse(Context context) {
         if (isWakeOnGestureEnabled(context)) {
-            if (DEBUG) Log.d(TAG, "Wake up display");
+            if (DEBUG) {
+                Log.d(TAG, "Wake up display");
+            }
             PowerManager powerManager = context.getSystemService(PowerManager.class);
             powerManager.wakeUp(SystemClock.uptimeMillis(), PowerManager.WAKE_REASON_GESTURE, TAG);
         } else {
-            if (DEBUG) Log.d(TAG, "Launch doze pulse");
+            if (DEBUG) {
+                Log.d(TAG, "Launch doze pulse");
+            }
             context.sendBroadcastAsUser(
                     new Intent(DOZE_INTENT), new UserHandle(UserHandle.USER_CURRENT));
         }
