@@ -23,6 +23,10 @@ PRODUCT_MANUFACTURER := Xiaomi
 
 # GMS
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
+WITH_GMS := true
+
+# EPPE
+TARGET_DISABLE_EPPE := true
 
 # Fingerprint
 BUILD_FINGERPRINT := POCO/surya_global/surya:12/RKQ1.211019.001/V14.0.2.0.SJGMIXM:user/release-keys
